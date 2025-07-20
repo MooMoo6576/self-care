@@ -1,0 +1,135 @@
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #181d27;
+  color: #fff;
+  padding: 0;
+  margin: 0;
+}
+
+.upload-section {
+  background: #23293a;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px #40e6ff30;
+  margin: 32px auto;
+  padding: 28px 22px 22px 22px;
+  max-width: 420px;
+  text-align: center;
+  border: 2px solid #40e6ff40;
+}
+
+.upload-section h2 {
+  color: #40e6ff;
+  font-size: 1.3em;
+  font-weight: 600;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+}
+
+.image-preview img,
+.progress-preview-img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px #40e6ff30;
+  background: #fff;
+  display: block;
+  margin: 16px auto 0 auto;
+}
+
+.actions {
+  margin-top: 12px;
+}
+
+.action-btn,
+.actions button {
+  background: #40e6ff;
+  color: #181d27;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  margin: 0 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.action-btn:hover,
+.actions button:hover {
+  background: #ff4081;
+  color: #fff;
+}
+
+@media (max-width: 700px) {
+  .upload-section {
+    padding: 16px 2vw;
+    margin: 18px 0;
+    max-width: 98vw;
+  }
+  .upload-section h2 {
+    font-size: 1.1em;
+  }
+  .image-preview img,
+  .progress-preview-img {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+.image-gallery {
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+  padding: 8px 0 8px 0;
+  scroll-behavior: smooth;
+  cursor: grab;
+  transition: box-shadow 0.2s;
+  background: transparent;
+}
+.image-gallery.active {
+  cursor: grabbing;
+  box-shadow: 0 4px 18px #40e6ff30;
+}
+
+.gallery-img-wrap {
+  position: relative;
+  flex: 0 0 auto;
+  display: inline-block;
+}
+
+.progress-preview-img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px #40e6ff30;
+  background: #fff;
+  display: block;
+}
+
+.remove-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: transparent;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  font-size: 1.2em;
+  cursor: pointer;
+  opacity: 0.85;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s, color 0.2s, opacity 0.2s;
+  z-index: 2;
+  box-shadow: none;
+}
+
+.remove-btn:hover {
+  background: #40e6ff;
+  color: #181d27;
+  opacity: 1;
+}
