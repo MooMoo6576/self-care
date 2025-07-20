@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Southgate Photo Upload</title>
+  <link rel="stylesheet" href="../main/styles.css" />
+  <link rel="stylesheet" href="progress.css" />
+</head>
+<body>
+  <a href="../main/home.html" class="home-btn">← Home</a>
+  <main>
+    <div class="upload-section" id="face-section">
+      <h2>Face</h2>
+      <input type="file" accept="image/*" onchange="previewImage(event, 'face')" />
+      <div class="image-gallery" id="face-gallery"></div>
+    </div>
+
+    <div class="upload-section" id="hair-section">
+      <h2>Hair</h2>
+      <input type="file" accept="image/*" onchange="previewImage(event, 'hair')" />
+      <div class="image-gallery" id="hair-gallery"></div>
+    </div>
+
+    <div class="upload-section" id="workout-section">
+      <h2>Workout</h2>
+      <input type="file" accept="image/*" onchange="previewImage(event, 'workout')" />
+      <div class="image-gallery" id="workout-gallery"></div>
+    </div>
+  </main>
+  <script src="progress.js"></script>
+  <footer>
+    &copy; 2025 Designed by Deandrie. Self care, but make it stylish.
+  </footer>
+</body>
+</html>
