@@ -357,15 +357,16 @@ h1, h2 {
   }
 
   .back-btn {
+  
     width: 90vw;
     max-width: 400px;
     font-size: 1em;
     padding: 14px 0;
     margin: 32px auto 18px auto;
+    position: static;    /* Ensure it's part of the normal flow */
     left: unset;
     bottom: unset;
     transform: none;
-    position: static;
   }
 
   .home-btn {
