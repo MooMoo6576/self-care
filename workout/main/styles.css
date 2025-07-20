@@ -361,9 +361,11 @@ h1, h2 {
     max-width: 400px;
     font-size: 1em;
     padding: 14px 0;
-    left: 50%;
-    bottom: 16px;
-    transform: translateX(-50%);
+    margin: 32px auto 18px auto;
+    left: unset;
+    bottom: unset;
+    transform: none;
+    position: static;
   }
 
   .home-btn {
