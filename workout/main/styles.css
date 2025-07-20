@@ -207,7 +207,7 @@ h1, h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 4em;
+  font-size: 3em;
   font-weight: bold;
   margin: 40px auto 20px auto;
   background: linear-gradient(90deg, #40ffe6, #40e6ff6d);
@@ -323,17 +323,20 @@ h1, h2 {
     margin: 18px 0;
     border-radius: 10px;
     box-sizing: border-box;
+    overflow: hidden;
   }
   .card h2 {
     font-size: 1.1em;
   }
   .exercise-img {
-    max-width: 96vw;
-    width: 96vw;
+     max-width: 100%;
+    width: 100%;
     height: auto;
     max-height: 220px;
     border-radius: 10px;
     margin-bottom: 12px;
+    display: block;
+    object-fit: cover;
   }
   .exercise-table {
     width: 98vw;
@@ -343,6 +346,7 @@ h1, h2 {
     border-radius: 0;
   }
   h1, h2 {
+      margin-top: 48px;
     font-size: 1.3em;
   }
   body {
@@ -350,5 +354,24 @@ h1, h2 {
     align-items: stretch;
     padding: 0;
     margin: 0;
+  }
+
+  .back-btn {
+    width: 90vw;
+    max-width: 400px;
+    font-size: 1em;
+    padding: 14px 0;
+    left: 50%;
+    bottom: 16px;
+    transform: translateX(-50%);
+  }
+
+  .home-btn {
+    top: 8px;
+    left: 8px;
+    padding: 7px 14px;
+    font-size: 0.95em;
+    z-index: 300;
+    background: rgba(64,230,255,0.92);
   }
 }
