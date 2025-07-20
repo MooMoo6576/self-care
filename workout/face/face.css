@@ -167,15 +167,16 @@
     border-radius: 6px;
     margin-bottom: 6px;
   }
-   .home-btn {
-    position: static;
+ .home-btn {
+    position: static !important;
     display: block;
-    margin: 16px auto 0 auto; /* centers horizontally */
-    top: unset;
-    left: unset;
-    right: unset;
-    transform: none;
+    margin: 16px auto 0 auto !important; /* centers horizontally */
+    top: unset !important;
+    left: unset !important;
+    right: unset !important;
+    transform: none !important;
     text-align: center;
-    width: fit-content; /* or a specific width if you prefer */
+    width: max-content;
+    z-index: 200;
   }
 }
