@@ -1,0 +1,176 @@
+/* === Face Content Styling === */
+.face-content {
+  max-width: 600px;
+  margin: 32px auto;
+  padding: 24px 8vw;
+  color: #fff;
+  font-size: 1.15em; /* Larger base font size for readability */
+}
+
+.face-content h2,
+.face-card h2 {
+  color: #40e6ff;
+  font-size: 1.3em;
+  font-weight: 600;
+  margin: 16px 0 8px 0;
+  letter-spacing: 0.5px;
+}
+
+.face-content ul,
+.face-card ul {
+  list-style: disc inside;
+  margin-bottom: 18px;
+  padding-left: 0;
+  margin: 0 auto;
+  text-align: left;
+  display: inline-block;
+}
+
+.face-content li,
+.face-card li {
+  margin-bottom: 8px;
+  line-height: 1.6;
+  font-size: 1.08em; /* Slightly larger for lists */
+  color: #fff;
+}
+
+.face-content em,
+.face-card em {
+  color: #ff4081;
+  font-style: italic;
+}
+
+/* === Home Button Styling === */
+.home-btn {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  padding: 10px 22px;
+  font-size: 1em;
+  background: #40e6ff;
+  border: none;
+  border-radius: 8px;
+  color: #181d27;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(64,230,255,0.15);
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+  z-index: 200;
+  display: inline-block;
+}
+.home-btn:hover {
+  background: #de48e0;
+  color: #fff;
+  transform: scale(1.04);
+}
+
+/* === Face Card Styling === */
+.face-card {
+  background: #181d27;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px #40e6ff30;
+  margin: 32px 0;
+  padding: 28px 22px 22px 22px;
+  text-align: center;
+  color: #fff;
+  border: 2px solid #40e6ff40;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.face-card-img-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.face-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 8px 32px #ff408180;
+  border-color: #ff4081;
+}
+
+.face-card-img {
+  width: 100%;
+  max-width: 280px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 2px 12px #40e6ff30;
+  background: #fff;
+}
+
+.face-card h2 {
+  color: #40e6ff;
+  font-size: 1.3em;
+  font-weight: 600;
+  margin: 12px 0 10px 0;
+  letter-spacing: 0.5px;
+}
+
+.face-card-reps li {
+  margin-bottom: 6px;
+}
+
+.face-card-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 10px;
+}
+
+.face-card-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 0 auto;
+  background: transparent;
+}
+
+.face-card-table th {
+  background: #23293a;
+  color: #40e6ff;
+  font-weight: 600;
+  padding: 8px 10px;
+  border-radius: 8px 8px 0 0;
+  font-size: 1em;
+}
+
+.face-card-table td {
+  vertical-align: top;
+  background: #23293a;
+  padding: 12px 14px;
+  border-radius: 0 0 8px 8px;
+  color: #fff;
+  font-size: 1.05em;
+}
+
+.face-card-table ul {
+  margin: 0;
+  padding-left: 18px;
+  list-style: disc inside;
+}
+
+.face-card-table td:last-child ul {
+  color: #ff4081;
+  list-style: circle inside;
+}
+
+/* === Responsive Adjustments === */
+@media (max-width: 700px) {
+  .face-content {
+    padding: 16px 2vw;
+    font-size: 1em;
+  }
+  .face-card {
+    padding: 18px 4vw;
+    margin: 18px 0;
+  }
+  .face-card h2 {
+    font-size: 1.1em;
+  }
+}
