@@ -167,12 +167,15 @@
     border-radius: 6px;
     margin-bottom: 6px;
   }
-  .home-btn {
+   .home-btn {
     position: static;
     display: block;
-    margin: 16px auto 0 auto;
+    margin: 16px auto 0 auto; /* centers horizontally */
     top: unset;
     left: unset;
+    right: unset;
     transform: none;
+    text-align: center;
+    width: fit-content; /* or a specific width if you prefer */
   }
 }
