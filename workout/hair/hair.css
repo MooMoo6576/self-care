@@ -1,0 +1,104 @@
+.hair-card-img-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.hair-card-img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px #40e6ff30;
+  background: #fff;
+}
+
+.hair-card, .hair-header {
+  background: #181d27;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px #40e6ff30;
+  margin: 32px 0;
+  padding: 28px 22px 22px 22px;
+  text-align: center;
+  color: #fff;
+  border: 2px solid #40e6ff40;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.hair-header {
+  background: none;
+  color: #40e6ff;
+  font-size: 1.4em;
+  border: none;
+  box-shadow: none;
+  margin-bottom: 18px;
+  padding: 0;
+}
+
+.hair-card h2 {
+  color: #40e6ff;
+  font-size: 1.3em;
+  font-weight: 600;
+  margin: 12px 0 10px 0;
+  letter-spacing: 0.5px;
+}
+
+.hair-card-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 10px;
+}
+
+.hair-card-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 0 auto;
+  background: transparent;
+}
+
+.hair-card-table th {
+  background: #23293a;
+  color: #40e6ff;
+  font-weight: 600;
+  padding: 8px 10px;
+  border-radius: 8px 8px 0 0;
+  font-size: 1em;
+}
+
+.hair-card-table td {
+  vertical-align: top;
+  background: #23293a;
+  padding: 12px 14px;
+  border-radius: 0 0 8px 8px;
+  color: #fff;
+  font-size: 1.05em;
+}
+
+.hair-card-table ul {
+  margin: 0;
+  padding-left: 18px;
+  list-style: disc inside;
+}
+
+.hair-card-table td:last-child ul {
+  color: #ff4081;
+  list-style: circle inside;
+}
+
+.hair-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 8px 32px #ff408180;
+  border-color: #ff4081;
+}
+
+@media (max-width: 700px) {
+  .hair-card, .hair-header {
+    padding: 16px 2vw;
+    margin: 18px 0;
+  }
+  .hair-card h2 {
+    font-size: 1.1em;
+  }
+}
