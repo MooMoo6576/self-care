@@ -1,66 +1,46 @@
+// Requires: <script src="https://cdn.jsdelivr.net/npm/idb-keyval@6/dist/idb-keyval.iife.js"></script> in your HTML <head>
 document.addEventListener('DOMContentLoaded', function () {
-  // Store images for each section, loaded from localStorage if available
-  const images = {
-    face: [],
-    hair: [],
-    workout: []
-  };
-
-  function saveImages() {
-    localStorage.setItem('progressImages', JSON.stringify(images));
-  }
-
-  function loadImages() {
-    const saved = localStorage.getItem('progressImages');
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        images.face = parsed.face || [];
-        images.hair = parsed.hair || [];
-        images.workout = parsed.workout || [];
-      } catch (e) {
-        localStorage.removeItem('progressImages');
-      }
-    }
-  }
-
-  function renderGallery(sectionId) {
-    const galleryDiv = document.getElementById(`${sectionId}-gallery`);
-    if (!galleryDiv) return;
-    galleryDiv.innerHTML = images[sectionId].map((src, idx) =>
-      `<div class="gallery-img-wrap">
-        <img src="${src}" alt="Uploaded" class="progress-preview-img" />
-        <button class="remove-btn" onclick="removeImage('${sectionId}', ${idx})">&times;</button>
-      </div>`
-    ).join('');
-  }
-
-  // Load images from localStorage on page load
-  loadImages();
-  renderGallery('face');
-  renderGallery('hair');
-  renderGallery('workout');
-
-  // Each section has its own file input
+  // Save image to IndexedDB
   window.previewImage = function (event, sectionId) {
     const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        images[sectionId].push(e.target.result);
-        saveImages();
-        renderGallery(sectionId);
-        event.target.value = '';
-      };
-      reader.readAsDataURL(file);
-    }
+    if (!file) return;
+    // Store as Blob in IndexedDB
+    idbKeyval.set(`${sectionId}-image-${Date.now()}`, file).then(() => {
+      renderGalleryFromIDB(sectionId);
+      event.target.value = '';
+    });
   };
 
-  window.removeImage = function (sectionId, idx) {
-    images[sectionId].splice(idx, 1);
-    saveImages();
-    renderGallery(sectionId);
+  // Render images from IndexedDB for a section
+  function renderGalleryFromIDB(sectionId) {
+    const galleryDiv = document.getElementById(`${sectionId}-gallery`);
+    if (!galleryDiv) return;
+    idbKeyval.keys().then(keys => {
+      // Only keys for this section
+      const sectionKeys = keys.filter(key => key.startsWith(sectionId + '-image-'));
+      Promise.all(sectionKeys.map(key =>
+        idbKeyval.get(key).then(blob => {
+          const url = URL.createObjectURL(blob);
+          return `<div class="gallery-img-wrap">
+            <img src="${url}" alt="Uploaded" class="progress-preview-img" />
+            <button class="remove-btn" onclick="removeImageIDB('${key}', '${sectionId}')">&times;</button>
+          </div>`;
+        })
+      )).then(imgHtmlArr => {
+        galleryDiv.innerHTML = imgHtmlArr.join('');
+      });
+    });
+  }
+
+  // Remove image from IndexedDB
+  window.removeImageIDB = function (key, sectionId) {
+    idbKeyval.del(key).then(() => {
+      renderGalleryFromIDB(sectionId);
+    });
   };
+
+  // On page load, render all galleries from IndexedDB
+  ['face', 'hair', 'workout'].forEach(renderGalleryFromIDB);
 
   // Enable horizontal drag-to-scroll and swipe for each gallery
   document.querySelectorAll('.image-gallery').forEach(gallery => {
