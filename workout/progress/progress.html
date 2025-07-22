@@ -10,21 +10,26 @@
 <body>
   <a href="../main/home.html" class="home-btn">← Home</a>
   <main>
+    <div class="upload-section" id="upload-section">
+      <label for="section-select"><strong>Select Section:</strong></label>
+      <select id="section-select">
+        <option value="face">Face</option>
+        <option value="hair">Hair</option>
+        <option value="workout">Workout</option>
+      </select>
+      <input id="photo-upload" type="file" accept="image/*" onchange="previewImage(event)" />
+    </div>
+
     <div class="upload-section" id="face-section">
       <h2>Face</h2>
-      <input id="face-upload" name="face-upload" type="file" accept="image/*" onchange="previewImage(event, 'face')" />
       <div class="image-gallery" id="face-gallery"></div>
     </div>
-
     <div class="upload-section" id="hair-section">
       <h2>Hair</h2>
-      <input id="hair-upload" name="hair-upload" type="file" accept="image/*" onchange="previewImage(event, 'hair')" />
       <div class="image-gallery" id="hair-gallery"></div>
     </div>
-
     <div class="upload-section" id="workout-section">
       <h2>Workout</h2>
-      <input id="workout-upload" name="workout-upload" type="file" accept="image/*" onchange="previewImage(event, 'workout')" />
       <div class="image-gallery" id="workout-gallery"></div>
     </div>
   </main>
