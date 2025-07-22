@@ -1,6 +1,6 @@
 // Requires: <script src="https://cdn.jsdelivr.net/npm/idb-keyval@6/dist/idb-keyval.iife.js"></script> in your HTML <head>
 document.addEventListener('DOMContentLoaded', function () {
-  // Save image to IndexedDB
+  // Save image to IndexedDB (no resizing, just store the file as-is)
   window.previewImage = function (event, sectionId) {
     const file = event.target.files[0];
     if (!file) return;
