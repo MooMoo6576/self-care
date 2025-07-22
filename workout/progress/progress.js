@@ -41,9 +41,8 @@ document.addEventListener('DOMContentLoaded', function () {
   renderGallery('hair');
   renderGallery('workout');
 
-  // Use a single file input and dropdown for section selection
-  window.previewImage = function (event) {
-    const sectionId = document.getElementById('section-select').value;
+  // Each section has its own file input
+  window.previewImage = function (event, sectionId) {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
