@@ -17,9 +17,14 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!galleryDiv) return;
     idbKeyval.keys().then(keys => {
       // Only keys for this section
-      const sectionKeys = keys.filter(key => key.startsWith(sectionId + '-image-'));
+      const sectionKeys = keys.filter(key => typeof key === "string" && key.startsWith(sectionId + '-image-'));
+      if (sectionKeys.length === 0) {
+        galleryDiv.innerHTML = '<div class="gallery-empty">No images yet.</div>';
+        return;
+      }
       Promise.all(sectionKeys.map(key =>
         idbKeyval.get(key).then(blob => {
+          if (!blob) return '';
           const url = URL.createObjectURL(blob);
           return `<div class="gallery-img-wrap">
             <img src="${url}" alt="Uploaded" class="progress-preview-img" />
@@ -27,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
           </div>`;
         })
       )).then(imgHtmlArr => {
-        galleryDiv.innerHTML = imgHtmlArr.join('');
+        galleryDiv.innerHTML = imgHtmlArr.filter(Boolean).join('');
       });
     });
   }
