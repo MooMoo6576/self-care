@@ -1,51 +1,84 @@
-// Requires: <script src="https://cdn.jsdelivr.net/npm/idb-keyval@6/dist/idb-keyval.iife.js"></script> in your HTML <head>
+// Uses localStorage: images are only visible on the device that uploaded them and persist after reload
 document.addEventListener('DOMContentLoaded', function () {
-  // Save image to IndexedDB (no resizing, just store the file as-is)
+  // Store images for each section
+  const images = {
+    face: [],
+    hair: [],
+    workout: []
+  };
+
+  function saveImages() {
+    localStorage.setItem('progressImages', JSON.stringify(images));
+  }
+
+  function loadImages() {
+    const saved = localStorage.getItem('progressImages');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        images.face = parsed.face || [];
+        images.hair = parsed.hair || [];
+        images.workout = parsed.workout || [];
+      } catch (e) {
+        localStorage.removeItem('progressImages');
+      }
+    }
+  }
+
+  function renderGallery(sectionId) {
+    const galleryDiv = document.getElementById(`${sectionId}-gallery`);
+    if (!galleryDiv) return;
+    if (!images[sectionId] || images[sectionId].length === 0) {
+      galleryDiv.innerHTML = '<div class="gallery-empty">No images yet.</div>';
+      return;
+    }
+    galleryDiv.innerHTML = images[sectionId].map((src, idx) =>
+      `<div class="gallery-img-wrap">
+        <img src="${src}" alt="Uploaded" class="progress-preview-img" />
+        <button class="remove-btn" onclick="removeImage('${sectionId}', ${idx})">&times;</button>
+      </div>`
+    ).join('');
+  }
+
+  // Load images from localStorage on page load
+  loadImages();
+  renderGallery('face');
+  renderGallery('hair');
+  renderGallery('workout');
+
+  // Save image as DataURL in localStorage, resizing before saving
   window.previewImage = function (event, sectionId) {
     const file = event.target.files[0];
     if (!file) return;
-    // Store as Blob in IndexedDB
-    idbKeyval.set(`${sectionId}-image-${Date.now()}`, file).then(() => {
-      renderGalleryFromIDB(sectionId);
-      event.target.value = '';
-    });
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const img = new Image();
+      img.onload = function () {
+        // Resize to max 800px width, keep aspect ratio
+        const maxW = 800;
+        const scale = Math.min(1, maxW / img.width);
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        // Compress to JPEG, quality 0.7
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
+        images[sectionId].push(dataUrl);
+        saveImages();
+        renderGallery(sectionId);
+        event.target.value = '';
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
   };
 
-  // Render images from IndexedDB for a section
-  function renderGalleryFromIDB(sectionId) {
-    const galleryDiv = document.getElementById(`${sectionId}-gallery`);
-    if (!galleryDiv) return;
-    idbKeyval.keys().then(keys => {
-      // Only keys for this section
-      const sectionKeys = keys.filter(key => typeof key === "string" && key.startsWith(sectionId + '-image-'));
-      if (sectionKeys.length === 0) {
-        galleryDiv.innerHTML = '<div class="gallery-empty">No images yet.</div>';
-        return;
-      }
-      Promise.all(sectionKeys.map(key =>
-        idbKeyval.get(key).then(blob => {
-          if (!blob) return '';
-          const url = URL.createObjectURL(blob);
-          return `<div class="gallery-img-wrap">
-            <img src="${url}" alt="Uploaded" class="progress-preview-img" />
-            <button class="remove-btn" onclick="removeImageIDB('${key}', '${sectionId}')">&times;</button>
-          </div>`;
-        })
-      )).then(imgHtmlArr => {
-        galleryDiv.innerHTML = imgHtmlArr.filter(Boolean).join('');
-      });
-    });
-  }
-
-  // Remove image from IndexedDB
-  window.removeImageIDB = function (key, sectionId) {
-    idbKeyval.del(key).then(() => {
-      renderGalleryFromIDB(sectionId);
-    });
+  window.removeImage = function (sectionId, idx) {
+    images[sectionId].splice(idx, 1);
+    saveImages();
+    renderGallery(sectionId);
   };
-
-  // On page load, render all galleries from IndexedDB
-  ['face', 'hair', 'workout'].forEach(renderGalleryFromIDB);
 
   // Enable horizontal drag-to-scroll and swipe for each gallery
   document.querySelectorAll('.image-gallery').forEach(gallery => {
