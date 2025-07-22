@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function () {
         images.hair = parsed.hair || [];
         images.workout = parsed.workout || [];
       } catch (e) {
-        // If corrupted, clear storage
         localStorage.removeItem('progressImages');
       }
     }
@@ -42,9 +41,9 @@ document.addEventListener('DOMContentLoaded', function () {
   renderGallery('hair');
   renderGallery('workout');
 
-  // Expose previewImage and removeImage globally
-  window.previewImage = function (event, sectionId) {
-     console.log('sectionId:', sectionId, 'images:', images);
+  // Use a single file input and dropdown for section selection
+  window.previewImage = function (event) {
+    const sectionId = document.getElementById('section-select').value;
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
@@ -52,7 +51,6 @@ document.addEventListener('DOMContentLoaded', function () {
         images[sectionId].push(e.target.result);
         saveImages();
         renderGallery(sectionId);
-        // Reset file input so same file can be uploaded again if needed
         event.target.value = '';
       };
       reader.readAsDataURL(file);
