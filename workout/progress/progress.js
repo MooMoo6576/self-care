@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Expose previewImage and removeImage globally
   window.previewImage = function (event, sectionId) {
+     console.log('sectionId:', sectionId, 'images:', images);
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
