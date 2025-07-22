@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const img = new Image();
       img.onload = function () {
         // Resize to max 800px width, keep aspect ratio
-        const maxW = 800;
+        const maxW = 600;
         const scale = Math.min(1, maxW / img.width);
         const canvas = document.createElement('canvas');
         canvas.width = img.width * scale;
