@@ -12,19 +12,19 @@
   <main>
     <div class="upload-section" id="face-section">
       <h2>Face</h2>
-      <input type="file" accept="image/*" onchange="previewImage(event, 'face')" />
+      <input type="file" accept="image/*" capture="environment" onchange="previewImage(event, 'face')" />
       <div class="image-gallery" id="face-gallery"></div>
     </div>
 
     <div class="upload-section" id="hair-section">
       <h2>Hair</h2>
-      <input type="file" accept="image/*" onchange="previewImage(event, 'hair')" />
+      <input type="file" accept="image/*" capture="environment" onchange="previewImage(event, 'hair')" />
       <div class="image-gallery" id="hair-gallery"></div>
     </div>
 
     <div class="upload-section" id="workout-section">
       <h2>Workout</h2>
-      <input type="file" accept="image/*" onchange="previewImage(event, 'workout')" />
+      <input type="file" accept="image/*" capture="environment" onchange="previewImage(event, 'workout')" />
       <div class="image-gallery" id="workout-gallery"></div>
     </div>
   </main>
